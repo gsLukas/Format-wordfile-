@@ -29,6 +29,7 @@ time.sleep (1)
 tam_texto = int(input("Informe o tamanho desejado: "));
 time.sleep(2)
 
+""" Aqui foi o primeiro teste realizado, vamos aperfeiações essa parte do código """
 if tam_texto == 1: 
     with open(name_txt, 'w') as outputFile:
         for word in WordsFile(file):
@@ -40,6 +41,8 @@ if tam_texto == 2:
         for word in WordsFile(file):
             if len(word) >= 8:
                 outputFile.write(word)
+                
+                """ Fim da NOTA """
 
 time.sleep (3)
 print ("Finalizado! :");
