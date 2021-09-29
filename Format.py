@@ -1,9 +1,21 @@
 #!/bin/bash env python3
 
-import time
+class bcolors:
+    OK = '\033[92m' #GREEN
+    WARNING = '\033[93m' #YELLOW
+    FAIL = '\033[91m' #RED
+    RESET = '\033[0m' #RESET COLOR
 
-file = input("Informe o nome do arquivo desejado: ");
-time.sleep(2)
+""" # print green :  print(f"{bcolors.OK}       _TEXTO_AQUI_  {bcolors.RESET}") """
+""" # print yellow : print(f"{bcolors.WARNING}  _TEXTO_AQUI_  {bcolors.RESET}") """
+""" # print red :    print(f"{bcolor.FAIL}      _TEXTO_AQUI_  {bcolors.RESET}") """
+
+from tqdm import tqdm
+from tqdm import trange
+import time
+from progress.bar import Bar
+
+file = input("Inserir o nome do " f"{bcolors.OK}WordFile{bcolors.RESET} para formatar: ");
 class WordsFile(object):
     """ evita sobrecarga de memoria e possibilita usar arquivos grandes de palavras """
     def __init__(self, filepath):
@@ -19,30 +31,31 @@ class WordsFile(object):
             raise StopIteration
         
         return self.currentLine
-time.sleep(2)
 
 name_txt = input("Informe o nome da nova WordList: ");
-print ("Selecione o tipo de formatação: ");
-time.sleep(1)
-print ("<= 8 Caracter: 1)");print (">= 8 Caracter: 2)");
-time.sleep (1)
-tam_texto = int(input("Informe o tamanho desejado: "));
-time.sleep(2)
+print ("Selecione o tamanho da formatação: ");
+print ("para formatar <= 8 Caracter: 1) ou  >= 8 Caracter: 2)");
+tam_texto = int(input("Informe o numero desejado: 1 ou 2: "));
 
-""" Aqui foi o primeiro teste realizado, vamos aperfeiações essa parte do código """
-if tam_texto == 1: 
+if tam_texto == 1:
     with open(name_txt, 'w') as outputFile:
         for word in WordsFile(file):
             if len(word) <= 8:
-                outputFile.write(word)
+                outputFile.write(word);
+        with Bar(f'{bcolors.OK}Processando...{bcolors.RESET}') as bar:
+            for word in range(100):
+                time.sleep(0.02);
+                bar.next()
 
 if tam_texto == 2:
     with open(name_txt, 'w') as outputFile:
         for word in WordsFile(file):
             if len(word) >= 8:
-                outputFile.write(word)
-                
-                """ Fim da NOTA """
+                outputFile.write(word);
+    with Bar(f'{bcolors.OK}Processando...{bcolors.RESET}') as bar:
+        for word in range(100):
+           time.sleep(0.02);
+           bar.next()
 
-time.sleep (3)
-print ("Finalizado! :");
+if tam_texto != 1 and tam_texto != 2:
+    print(f"{bcolors.FAIL}Ocorreu um erro, tente novamente!\nVocê deve usar 1 ou 2.{bcolors.RESET}")
