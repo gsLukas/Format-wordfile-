@@ -1,5 +1,5 @@
-# Format-wordfile-
-Config files for my GitHub profile.
+# FormatWordFile
+
 
 Version="0.1"
 
