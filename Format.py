@@ -1,4 +1,16 @@
-#!/bin/bash env python3
+#!/usr/bin/env python3
+
+
+import time
+from progress.bar import Bar
+import os
+
+os.system("clear")
+
+print ("\t\tEN-US// Welcome to FormatWordFile \n\t\tPT-BR// Bem vindo ao FormatWordFile\n" );
+print ("\t\t\tby gsLukas and zNairy" )
+time.sleep(2);
+os.system('clear')
 
 class bcolors:
     OK = '\033[92m' #GREEN
@@ -10,14 +22,16 @@ class bcolors:
 """ # print yellow : print(f"{bcolors.WARNING}  _TEXTO_AQUI_  {bcolors.RESET}") """
 """ # print red :    print(f"{bcolor.FAIL}      _TEXTO_AQUI_  {bcolors.RESET}") """
 
-from tqdm import tqdm
-from tqdm import trange
-import time
-from progress.bar import Bar
+print (f'{bcolors.WARNING}EN-US// Enter name of the WordFile to format \nPT-BR// Inserir o nome do WordFile para formatar: {bcolors.RESET}');
+print ('\nCurrent Directory:')
+os.system ('pwd')
 
-file = input("Inserir o nome do " f"{bcolors.OK}WordFile{bcolors.RESET} para formatar: ");
+file = input(f"{bcolors.OK}Path: {bcolors.RESET}");
 class WordsFile(object):
     """ evita sobrecarga de memoria e possibilita usar arquivos grandes de palavras """
+    """ avoids memory overload and makes it possible to use large word files """
+
+#34
     def __init__(self, filepath):
         self.wordfile = open(filepath, 'r', encoding="utf8", errors='ignore')
         self.currentLine = ''
@@ -29,33 +43,48 @@ class WordsFile(object):
         self.currentLine = self.wordfile.readline()
         if not self.currentLine:
             raise StopIteration
-        
+#46
         return self.currentLine
 
-name_txt = input("Informe o nome da nova WordList: ");
-print ("Selecione o tamanho da formatação: ");
-print ("para formatar <= 8 Caracter: 1) ou  >= 8 Caracter: 2)");
-tam_texto = int(input("Informe o numero desejado: 1 ou 2: "));
+print (f'{bcolors.WARNING}EN_US// Name for new WordFile\nPT_BR// Nome para novo WordFile {bcolors.RESET}');
+name_txt = input(f'{bcolors.OK}New Path:{bcolors.RESET}');
 
-if tam_texto == 1:
-    with open(name_txt, 'w') as outputFile:
-        for word in WordsFile(file):
-            if len(word) <= 8:
-                outputFile.write(word);
-        with Bar(f'{bcolors.OK}Processando...{bcolors.RESET}') as bar:
-            for word in range(100):
-                time.sleep(0.02);
-                bar.next()
+#Criar Menu de Escolha | Padrão de PassWord
 
-if tam_texto == 2:
-    with open(name_txt, 'w') as outputFile:
-        for word in WordsFile(file):
-            if len(word) >= 8:
-                outputFile.write(word);
-    with Bar(f'{bcolors.OK}Processando...{bcolors.RESET}') as bar:
+print (f"{bcolors.WARNING}\nEN-US// Standard WIFI format \nPT_BR// Formato padrão WIFI (Min8 Max 64): Press 1{bcolors.RESET}");
+
+wifi = int(input(f"{bcolors.OK}Select:{bcolors.RESET} "));
+
+#if wifi == 2:
+#    with Bar(f'{bcolors.RESET}Starting.....{bcolors.RESET}') as bar:
+#        for word in range(100):
+#            time.sleep(0.02);
+#            bar.next()
+#    print(f'{bcolors.FAIL}\nFormatting please wait for writing confirmation!{bcolors.RESET}');
+#    with open(name_txt, 'w') as outputFile:
+#        for word in WordsFile(file):
+#            if len(word) <= 8:
+#                outputFile.write(word);
+#    with Bar(f'{bcolors.OK}Saving...{bcolors.RESET}') as bar:
+#        for word in range(100):
+#            time.sleep(0.02);
+#            bar.next()
+
+#73
+if wifi == 1:
+    with Bar(f'{bcolors.RESET}Starting.....{bcolors.RESET}') as bar:
         for word in range(100):
            time.sleep(0.02);
-           bar.next()
+           bar.next()           
+    print(f'{bcolors.FAIL}\nFormatting please wait for writing confirmation!{bcolors.RESET}');
+    with open(name_txt, 'w') as outputFile:
+        for word in WordsFile(file):
+            if len(word) >= 8 and len(word) <= 64:
+                outputFile.write(word);
+    with Bar(f'{bcolors.OK}Saving...{bcolors.RESET}') as bar:
+        for word in range(100):
+            time.sleep(0.02);
+            bar.next()
 
-if tam_texto != 1 and tam_texto != 2:
+if wifi != 1 and wifi != 2:
     print(f"{bcolors.FAIL}Ocorreu um erro, tente novamente!\nVocê deve usar 1 ou 2.{bcolors.RESET}")
