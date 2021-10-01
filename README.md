@@ -1,13 +1,10 @@
 # FormatWordFile
 
-## Click image to view video in YouTube <br/>
+## Click link to view video in YouTube <br/>
 
-
-https://www.youtube.com/watch?v=EXt5x-1ZlGE <br/>
-
-[![FormatWordFile][https://i9.ytimg.com/vi/EXt5x-1ZlGE/mq3.jpg?sqp=CLDq3IoG&rs=AOn4CLBwr8cWjO4xlcMAKvt3-9qupl20Xw](https://www.youtube.com/watch?v=EXt5x-1ZlGE)
-
-
+https://www.youtube.com/embed/EXt5x-1ZlGE
+       
+       
 __version__ = '1.0'
 
 + Formatação por padrões de serviço ex: SSH, WIFI/WPA etc.. "Version 1.0"
