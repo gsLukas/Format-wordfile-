@@ -1,90 +1,86 @@
-#!/usr/bin/env python3
+#!/usr/bin python3
+
+__author__ = '@gsLukas'
+__colaborator__ = '@zNairy'
+__contact__ = 'Discord: gsLukao#6445 | zNairy#7181 || Github: https://github.com/gsLukas | https://github.com/zNairy/'
+__version__ = '1.0'
 
 
+print (__author__)
+print (__colaborator__)
+
+from Colors import BColors
+from wordsFile import WordsFile
 import time
-from progress.bar import Bar
 import os
 
 os.system("clear")
-
 print ("\t\tEN-US// Welcome to FormatWordFile \n\t\tPT-BR// Bem vindo ao FormatWordFile\n" );
 print ("\t\t\tby gsLukas and zNairy" )
 time.sleep(2);
 os.system('clear')
 
-class bcolors:
-    OK = '\033[92m' #GREEN
-    WARNING = '\033[93m' #YELLOW
-    FAIL = '\033[91m' #RED
-    RESET = '\033[0m' #RESET COLOR
-
-""" # print green :  print(f"{bcolors.OK}       _TEXTO_AQUI_  {bcolors.RESET}") """
-""" # print yellow : print(f"{bcolors.WARNING}  _TEXTO_AQUI_  {bcolors.RESET}") """
-""" # print red :    print(f"{bcolor.FAIL}      _TEXTO_AQUI_  {bcolors.RESET}") """
-
-print (f'{bcolors.WARNING}EN-US// Enter name of the WordFile to format \nPT-BR// Inserir o nome do WordFile para formatar: {bcolors.RESET}');
+print (f'{BColors.WARNING}EN-US// Enter name of the WordFile to format \nPT-BR// Inserir o nome do WordFile para formatar: {BColors.RESET}');
 print ('\nCurrent Directory:')
 os.system ('pwd')
 
-file = input(f"{bcolors.OK}Path: {bcolors.RESET}");
-class WordsFile(object):
-    """ evita sobrecarga de memoria e possibilita usar arquivos grandes de palavras """
-    """ avoids memory overload and makes it possible to use large word files """
+file = input(f"{BColors.OK}Path: {BColors.RESET}");
 
 
-    def __init__(self, filepath):
-        self.wordfile = open(filepath, 'r', encoding="utf8", errors='ignore')
-        self.currentLine = ''
-    
-    def __iter__(self):
-        return self
-    
-    def __next__(self):
-        self.currentLine = self.wordfile.readline()
-        if not self.currentLine:
-            raise StopIteration
+print (f'{BColors.WARNING}EN_US// Name for new WordFile\nPT_BR// Nome para novo WordFile {BColors.RESET}');
+name_txt = input(f'{BColors.OK}New Path:{BColors.RESET}');
 
-        return self.currentLine
+#Menu choice
 
-print (f'{bcolors.WARNING}EN_US// Name for new WordFile\nPT_BR// Nome para novo WordFile {bcolors.RESET}');
-name_txt = input(f'{bcolors.OK}New Path:{bcolors.RESET}');
+print (f"{BColors.WARNING}\nEN-US// Standard WIFI/wpa format \nPT_BR// Formato padrão WIFI/wpa (Min 8 Max 64): Press 1{BColors.RESET}");
+print (f"{BColors.WARNING}\nEN-US// Standard SSH format \nPT_BR// Formato padrão SSH (Min 1 Max 256): Press 2{BColors.RESET}");
+print (f"{BColors.WARNING}\nEN-US// Standard AWS format \nPT_BR// Formato padrão AWS (Min 8 Max 128): Press 3{BColors.RESET}");
+print (f"{BColors.WARNING}\nEN-US// Standard Windows format \nPT_BR// Formato padrão Windows (Min 1 Max 14): Press 4{BColors.RESET}");
+print (f"{BColors.WARNING}\nEN-US// Standard SQL Server format \nPT_BR// Formato padrão SQL Server (Min 8 Max 128): Press 5{BColors.RESET}");
 
-#Criar Menu de Escolha | Padrão de PassWord
+option = int(input(f"{BColors.OK}Select:{BColors.RESET} "));
 
-print (f"{bcolors.WARNING}\nEN-US// Standard WIFI format \nPT_BR// Formato padrão WIFI (Min8 Max 64): Press 1{bcolors.RESET}");
-
-wifi = int(input(f"{bcolors.OK}Select:{bcolors.RESET} "));
-
-#if wifi == 2:
-#    with Bar(f'{bcolors.RESET}Starting.....{bcolors.RESET}') as bar:
-#        for word in range(100):
-#            time.sleep(0.02);
-#            bar.next()
-#    print(f'{bcolors.FAIL}\nFormatting please wait for writing confirmation!{bcolors.RESET}');
-#    with open(name_txt, 'w') as outputFile:
-#        for word in WordsFile(file):
-#            if len(word) <= 8:
-#                outputFile.write(word);
-#    with Bar(f'{bcolors.OK}Saving...{bcolors.RESET}') as bar:
-#        for word in range(100):
-#            time.sleep(0.02);
-#            bar.next()
-
-#73
-if wifi == 1:
-    with Bar(f'{bcolors.RESET}Starting.....{bcolors.RESET}') as bar:
-        for word in range(100):
-           time.sleep(0.02);
-           bar.next()           
-    print(f'{bcolors.FAIL}\nFormatting please wait for writing confirmation!{bcolors.RESET}');
+if option == 1:
+    print(f'{BColors.FAIL}\nFormatting please wait for writing confirmation!{BColors.RESET}');
     with open(name_txt, 'w') as outputFile:
         for word in WordsFile(file):
-            if len(word) >= 8 and len(word) <= 64:
-                outputFile.write(word);
-    with Bar(f'{bcolors.OK}Saving...{bcolors.RESET}') as bar:
-        for word in range(100):
-            time.sleep(0.02);
-            bar.next()
+            word = "".join(w for w in word.split())
+            if word and any(w.isalpha() for w in word) and len(word) >= 8 and len(word) <= 64:
+                outputFile.write(word + "\n");
 
-if wifi != 1 and wifi != 2:
-    print(f"{bcolors.FAIL}Ocorreu um erro, tente novamente!\nVocê deve usar 1 ou 2.{bcolors.RESET}")
+
+elif option == 2:
+    print(f'{BColors.FAIL}\nFormatting please wait for writing confirmation!{BColors.RESET}');
+    with open(name_txt, 'w') as outputFile:
+        for word in WordsFile(file):
+            word = "".join(w for w in word.split())
+            if word and any(w.isalpha() for w in word) and len(word) >= 1 and len(word) <= 256:
+                outputFile.write(word + "\n");
+
+elif option == 3:
+    print(f'{BColors.FAIL}\nFormatting please wait for writing confirmation!{BColors.RESET}');
+    with open(name_txt, 'w') as outputFile:
+        for word in WordsFile(file):
+            word = "".join(w for w in word.split())
+            if word and any(w.isalpha() for w in word) and len(word) >= 8 and len(word) <= 128:
+                outputFile.write(word + "\n");
+
+elif option == 4:
+    print(f'{BColors.FAIL}\nFormatting please wait for writing confirmation!{BColors.RESET}');
+    with open(name_txt, 'w') as outputFile:
+        for word in WordsFile(file):
+            word = "".join(w for w in word.split())
+            if word and any(w.isalpha() for w in word) and len(word) >= 1 and len(word) <= 14:
+                outputFile.write(word + "\n");
+
+elif option == 5:
+    print(f'{BColors.FAIL}\nFormatting please wait for writing confirmation!{BColors.RESET}');
+    with open(name_txt, 'w') as outputFile:
+        for word in WordsFile(file):
+            word = "".join(w for w in word.split())
+            if word and any(w.isalpha() for w in word) and len(word) >= 8 and len(word) <= 128:
+                outputFile.write(word + "\n");
+
+
+else:
+    print(f"{BColors.FAIL}Invalid Option!{BColors.RESET}")

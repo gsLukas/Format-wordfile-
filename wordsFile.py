@@ -22,9 +22,10 @@ class WordsFile(object):
 
     def loadContent(self):
         try:
-            arquivo = open(self.namefile, 'r', encoding="utf8", errors='ignore')
+            arquivo = open(self.namefile, 'r', errors='ignore')
             self.abriu = True
             return arquivo
 
         except FileNotFoundError:
-            pass            
+            print("Mensagem de: ")
+            exit()            
