@@ -1,7 +1,6 @@
 # FormatWordFile
 
-
-+ Version="1.0"
+__version__ = '1.0'
 
 + Formatação por padrões de serviço ex: SSH, WIFI/WPA etc.. "Version 1.0"
 + Formatação com remoção de caracteres especiais e espaços em branco "Version 1.0"
@@ -39,3 +38,7 @@
 +       test4
        
 + Removing all words with a number equal to or less than "x" caracters.
+
+
+## author @gsLukas 
+## colaborator @zNairy
