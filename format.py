@@ -5,7 +5,7 @@ __colaborator__ = '@zNairy'
 __contact__ = 'Discord: gsLukao#6445 | zNairy#7181 || Github: https://github.com/gsLukas | https://github.com/zNairy/'
 __version__ = '1.0'
 
-from Colors import BColors
+from colors import BColors
 from wordsFile import WordsFile
 from time import sleep
 from os import system

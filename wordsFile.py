@@ -1,4 +1,4 @@
-from Colors import BColors
+from colors import BColors
 
 class WordsFile(object):
     """ evita sobrecarga de memoria e possibilita usar arquivos grandes de palavras
