@@ -1,5 +1,9 @@
 # FormatWordFile
 
+## Click image to view video in YouTube
+
+Video <br/>
+
 __version__ = '1.0'
 
 + Formatação por padrões de serviço ex: SSH, WIFI/WPA etc.. "Version 1.0"
@@ -14,13 +18,8 @@ __version__ = '1.0'
 + Basicamente, esse script vai formatar um wordlist/dict.
 + Ex:
 +      palavra1
-+      palavra2
-+      palavra3
-+      palavra4
 +      teste1
-+      teste2
-+      teste3
-+      teste4
+
 
 + Formatando as palavras mantendo um padrão desejado para o tipo de serviço que deseja utilizar.
 
@@ -29,13 +28,7 @@ __version__ = '1.0'
 + Basically, this script will format a wordlist/dict. 
 + Ex: 
 +       bigword
-+       bigword
-+       bigword
-+       bigword
 +       test1
-+       test2
-+       test3
-+       test4
        
 + Removing all words with a number equal to or less than "x" caracters.
 
