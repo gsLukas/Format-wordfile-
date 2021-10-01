@@ -1,8 +1,13 @@
+from Colors import BColors
 
 class WordsFile(object):
+    """ evita sobrecarga de memoria e possibilita usar arquivos grandes de palavras
+        avoids memory overload and makes it possible to use large word files """
+    
     def __init__(self, namefile):
         self.namefile = namefile
-        self.wordlist = open(namefile, 'r', encoding="utf8", errors='ignore')
+        self.abriu = False
+        self.wordlist = self.loadContent()
         self.currentLine = ''
     
     def __iter__(self):
@@ -14,3 +19,12 @@ class WordsFile(object):
             raise StopIteration
         
         return self.currentLine
+
+    def loadContent(self):
+        try:
+            arquivo = open(self.namefile, 'r', encoding="utf8", errors='ignore')
+            self.abriu = True
+            return arquivo
+
+        except FileNotFoundError:
+            pass            

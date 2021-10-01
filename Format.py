@@ -31,7 +31,7 @@ class WordsFile(object):
     """ evita sobrecarga de memoria e possibilita usar arquivos grandes de palavras """
     """ avoids memory overload and makes it possible to use large word files """
 
-#34
+
     def __init__(self, filepath):
         self.wordfile = open(filepath, 'r', encoding="utf8", errors='ignore')
         self.currentLine = ''
@@ -43,7 +43,7 @@ class WordsFile(object):
         self.currentLine = self.wordfile.readline()
         if not self.currentLine:
             raise StopIteration
-#46
+
         return self.currentLine
 
 print (f'{bcolors.WARNING}EN_US// Name for new WordFile\nPT_BR// Nome para novo WordFile {bcolors.RESET}');
