@@ -23,7 +23,7 @@
 +      teste3
 +      teste4
 
-+ Removendo todas palavras com quantidade igual ou menor que 8 caracters.
++ Formatando as palavras mantendo um padrão desejado para o tipo de serviço que deseja utilizar.
 
 //English
 
