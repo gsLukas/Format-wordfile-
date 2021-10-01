@@ -6,7 +6,6 @@ class WordsFile(object):
     
     def __init__(self, namefile):
         self.namefile = namefile
-        self.abriu = False
         self.wordlist = self.loadContent()
         self.currentLine = ''
     
@@ -22,10 +21,11 @@ class WordsFile(object):
 
     def loadContent(self):
         try:
-            arquivo = open(self.namefile, 'r', errors='ignore')
-            self.abriu = True
-            return arquivo
+            return open(self.namefile, 'r', errors='ignore')
 
         except FileNotFoundError:
-            print("Mensagem de: ")
-            exit()            
+            print(f'{BColors.FAIL}File {BColors.WARNING}"{self.namefile}" {BColors.FAIL}not found.{BColors.RESET}')
+            exit(1)
+        except PermissionError:
+            print(f'{BColors.FAIL}Failed to open file {BColors.WARNING}"{self.namefile}", {BColors.FAIL}permission denied!{BColors.RESET}')
+            exit(1)
