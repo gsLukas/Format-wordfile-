@@ -8,16 +8,20 @@ class WordsFile(object):
         self.namefile = namefile
         self.wordlist = self.loadContent()
         self.currentLine = ''
-    
+
     def __iter__(self):
         return self
-    
+
     def __next__(self):
         self.currentLine = self.wordlist.readline()
-        if not self.currentLine:
-            raise StopIteration
-        
-        return self.currentLine
+        if self.currentLine:
+            self.currentLine = self.currentLine.strip()
+            if self.currentLine and any(w.isalpha() for w in self.currentLine):
+                return self.currentLine
+                
+            self.__next__()
+
+        raise StopIteration
 
     def loadContent(self):
         try:
@@ -26,6 +30,7 @@ class WordsFile(object):
         except FileNotFoundError:
             print(f'{BColors.FAIL}File {BColors.WARNING}"{self.namefile}" {BColors.FAIL}not found.{BColors.RESET}')
             exit(1)
+            
         except PermissionError:
             print(f'{BColors.FAIL}Failed to open file {BColors.WARNING}"{self.namefile}", {BColors.FAIL}permission denied!{BColors.RESET}')
             exit(1)

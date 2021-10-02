@@ -44,7 +44,7 @@ if option.isdigit() and option == 1:
     with open(newFile, 'w') as outputFile:
         for word in WordsFile(file):
             word = "".join(w for w in word.split())
-            if word and any(w.isalpha() for w in word) and len(word) >= 8 and len(word) <= 64:
+            if len(word) >= 8 and len(word) <= 64:
                 outputFile.write(word + "\n")
 
 elif option.isdigit() and option == 2:
@@ -52,7 +52,7 @@ elif option.isdigit() and option == 2:
     with open(newFile, 'w') as outputFile:
         for word in WordsFile(file):
             word = "".join(w for w in word.split())
-            if word and any(w.isalpha() for w in word) and len(word) >= 1 and len(word) <= 256:
+            if len(word) >= 1 and len(word) <= 256:
                 outputFile.write(word + "\n")
 
 elif option.isdigit() and option == 3:
@@ -60,7 +60,7 @@ elif option.isdigit() and option == 3:
     with open(newFile, 'w') as outputFile:
         for word in WordsFile(file):
             word = "".join(w for w in word.split())
-            if word and any(w.isalpha() for w in word) and len(word) >= 8 and len(word) <= 128:
+            if len(word) >= 8 and len(word) <= 128:
                 outputFile.write(word + "\n")
 
 elif option.isdigit() and option == 4:
@@ -68,7 +68,7 @@ elif option.isdigit() and option == 4:
     with open(newFile, 'w') as outputFile:
         for word in WordsFile(file):
             word = "".join(w for w in word.split())
-            if word and any(w.isalpha() for w in word) and len(word) >= 1 and len(word) <= 14:
+            if len(word) >= 1 and len(word) <= 14:
                 outputFile.write(word + "\n")
 
 elif option.isdigit() and option == 5:
@@ -76,7 +76,7 @@ elif option.isdigit() and option == 5:
     with open(newFile, 'w') as outputFile:
         for word in WordsFile(file):
             word = "".join(w for w in word.split())
-            if word and any(w.isalpha() for w in word) and len(word) >= 8 and len(word) <= 128:
+            if len(word) >= 8 and len(word) <= 128:
                 outputFile.write(word + "\n")
 else:
     print(f"{BColors.FAIL}Invalid Option!{BColors.RESET}")
