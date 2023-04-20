@@ -1,82 +1,43 @@
-#!/usr/bin python3
-
-__author__ = '@gsLukas'
-__colaborator__ = '@zNairy'
-__contact__ = 'Discord: gsLukao#6445 | zNairy#7181 || Github: https://github.com/gsLukas | https://github.com/zNairy/'
-__version__ = '1.0'
+#!/usr/bin python
 
 from colors import BColors
 from wordsFile import WordsFile
 from time import sleep
-from os import system
-from subprocess import getoutput
+from os import system, path
+
+def format_words_file(input_file_path, output_file_path, min_length, max_length):
+    """Reads a file of words, formats them and writes to another file."""
+    if not path.exists(input_file_path):
+        print(f"{BColors.FAIL}File does not exist!{BColors.RESET}")
+        return
+    
+    print(f'{BColors.FAIL}\nFormatting please wait for writing confirmation!{BColors.RESET}')
+    with open(output_file_path, 'w') as output_file:
+        for word in WordsFile(input_file_path):
+            word = "".join(w for w in word.split())
+            if len(word) >= min_length and len(word) <= max_length:
+                output_file.write(word + "\n")
 
 system("clear")
-
-print ("\t\t EN-US// Welcome to FormatWordFile \n\t\tPT-BR// Bem vindo ao FormatWordFile\n" )
-print (f"\t\t      by {__author__} and {__colaborator__}" )
-
 sleep(2)
 system('clear')
+print(f"Current Directory: [{path.abspath(path.curdir)}]")
 
-print (f'{BColors.WARNING}EN-US// Enter name of the WordFile to format \nPT-BR// Inserir o nome do WordFile para formatar: {BColors.RESET}')
-print (f"\nCurrent Directory: [{getoutput('pwd')}]")
+input_file_path = input(f"{BColors.OK}Input file path: {BColors.RESET}")
+output_file_path = input(f"{BColors.OK}Output file path: {BColors.RESET}")
 
-inputFile = input(f"{BColors.OK}Path: {BColors.RESET}")
+option = input(f"{BColors.OK}Select an option:\n1 - Words between 8 and 64 characters\n2 - Words between 1 and 256 characters\n3 - Words between 8 and 128 characters\n4 - Words between 1 and 14 characters\n5 - Words between 8 and 128 characters\n{BColors.RESET}")
 
-file = WordsFile(inputFile) # tentando abrindo arquivo
-
-print (f'{BColors.WARNING}EN_US// Name for new WordFile\nPT_BR// Nome para novo WordFile {BColors.RESET}')
-newFile = input(f'{BColors.OK}New Path:{BColors.RESET}')
-
-#Menu choice
-
-print (f"{BColors.WARNING}\nEN-US// Standard WIFI/wpa format \nPT_BR// Formato padrão WIFI/wpa (Min 8 Max 64): Press 1{BColors.RESET}")
-print (f"{BColors.WARNING}\nEN-US// Standard SSH format \nPT_BR// Formato padrão SSH (Min 1 Max 256): Press 2{BColors.RESET}")
-print (f"{BColors.WARNING}\nEN-US// Standard AWS format \nPT_BR// Formato padrão AWS (Min 8 Max 128): Press 3{BColors.RESET}")
-print (f"{BColors.WARNING}\nEN-US// Standard Windows format \nPT_BR// Formato padrão Windows (Min 1 Max 14): Press 4{BColors.RESET}")
-print (f"{BColors.WARNING}\nEN-US// Standard SQL Server format \nPT_BR// Formato padrão SQL Server (Min 8 Max 128): Press 5{BColors.RESET}")
-
-option = input(f"{BColors.OK}Select:{BColors.RESET} ")
-
-if option.isdigit() and option == 1:
-    print(f'{BColors.FAIL}\nFormatting please wait for writing confirmation!{BColors.RESET}')
-    with open(newFile, 'w') as outputFile:
-        for word in WordsFile(file):
-            word = "".join(w for w in word.split())
-            if len(word) >= 8 and len(word) <= 64:
-                outputFile.write(word + "\n")
-
-elif option.isdigit() and option == 2:
-    print(f'{BColors.FAIL}\nFormatting please wait for writing confirmation!{BColors.RESET}')
-    with open(newFile, 'w') as outputFile:
-        for word in WordsFile(file):
-            word = "".join(w for w in word.split())
-            if len(word) >= 1 and len(word) <= 256:
-                outputFile.write(word + "\n")
-
-elif option.isdigit() and option == 3:
-    print(f'{BColors.FAIL}\nFormatting please wait for writing confirmation!{BColors.RESET}')
-    with open(newFile, 'w') as outputFile:
-        for word in WordsFile(file):
-            word = "".join(w for w in word.split())
-            if len(word) >= 8 and len(word) <= 128:
-                outputFile.write(word + "\n")
-
-elif option.isdigit() and option == 4:
-    print(f'{BColors.FAIL}\nFormatting please wait for writing confirmation!{BColors.RESET}')
-    with open(newFile, 'w') as outputFile:
-        for word in WordsFile(file):
-            word = "".join(w for w in word.split())
-            if len(word) >= 1 and len(word) <= 14:
-                outputFile.write(word + "\n")
-
-elif option.isdigit() and option == 5:
-    print(f'{BColors.FAIL}\nFormatting please wait for writing confirmation!{BColors.RESET}')
-    with open(newFile, 'w') as outputFile:
-        for word in WordsFile(file):
-            word = "".join(w for w in word.split())
-            if len(word) >= 8 and len(word) <= 128:
-                outputFile.write(word + "\n")
+if not option.isdigit() or int(option) not in range(1, 6):
+    print(f"{BColors.FAIL}Invalid option!{BColors.RESET}")
 else:
-    print(f"{BColors.FAIL}Invalid Option!{BColors.RESET}")
+    if int(option) == 1:
+        format_words_file(input_file_path, output_file_path, 8, 64)
+    elif int(option) == 2:
+        format_words_file(input_file_path, output_file_path, 1, 256)
+    elif int(option) == 3:
+        format_words_file(input_file_path, output_file_path, 8, 128)
+    elif int(option) == 4:
+        format_words_file(input_file_path, output_file_path, 1, 14)
+    else:
+        format_words_file(input_file_path, output_file_path, 8, 128)
