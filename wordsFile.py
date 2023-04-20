@@ -1,75 +1,54 @@
 import os
-from colors import BColors
+import csv
 
+MIN_WORD_LEN = 3
 
-class WordsFile:
-    """
-    Esta classe é responsável por ler arquivos grandes de palavras, evitando sobrecarga de memória.
-    """
+def open_file(filename):
+    try:
+        fp = open(filename, 'r')
+    except FileNotFoundError:
+        print(f"Erro ao abrir o arquivo '{filename}'")
+        return None
+    else:
+        return fp
 
-    def __init__(self, namefile: str):
-        """
-        Inicializa a classe.
+def read_words(fp):
+    words = []
+    reader = csv.reader(fp)
+    for row in reader:
+        for word in row:
+            if len(word) >= MIN_WORD_LEN and word.isalpha() and word.lower() == word:
+                words.append(word)
+    return words
 
-        :param namefile: O nome do arquivo a ser lido.
-        """
-        self.namefile = namefile
-        self.current_line = ''
+def check_duplicates(words):
+    return len(words) != len(set(words))
 
-        # Verifica se o arquivo existe e é um arquivo válido
-        if not os.path.isfile(self.namefile):
-            raise FileNotFoundError(f"{BColors.FAIL}Arquivo '{self.namefile}' não encontrado.{BColors.RESET}")
+def format_wordlist():
+    filename = input("Digite o nome do arquivo de word list: ")
+    fp = open_file(filename)
+    if fp is None:
+        return
 
-        # Abre o arquivo e armazena em uma variável
-        try:
-            self.wordlist = open(self.namefile, 'r', errors='ignore')
-        except PermissionError:
-            raise PermissionError(f"{BColors.FAIL}Falha ao abrir o arquivo '{self.namefile}', permissão negada!{BColors.RESET}")
+    words = read_words(fp)
+    fp.close()
 
-    def __iter__(self):
-        """
-        Retorna um iterador para a classe.
-        """
-        return self
+    if len(words) == 0:
+        print(f"Nenhuma palavra válida encontrada no arquivo '{filename}'")
+        return
 
-    def __next__(self):
-        """
-        Retorna a próxima linha do arquivo.
-        """
-        self.current_line = self.wordlist.readline()
+    if check_duplicates(words):
+        print(f"Foram encontradas palavras duplicadas no arquivo '{filename}'")
 
-        # Verifica se a linha é válida
-        while self.current_line:
-            self.current_line = self.current_line.strip()
-            if self.current_line and any(w.isalpha() for w in self.current_line):
-                return self.current_line
-            self.current_line = self.wordlist.readline()
+    outfile = input("Digite o nome do arquivo de saída: ")
+    try:
+        with open(outfile, 'w') as outfp:
+            writer = csv.writer(outfp)
+            writer.writerows([[word] for word in sorted(words)])
+    except OSError:
+        print(f"Erro ao criar o arquivo '{outfile}'")
+        return
 
-        # Fecha o arquivo
-        self.wordlist.close()
+    print("Word list formatada com sucesso!")
 
-        # Levanta a exceção para indicar o final do arquivo
-        raise StopIteration
-
-    def loadContent(self):
-        """
-        Carrega o conteúdo do arquivo em uma lista.
-
-        :return: Uma lista com as palavras do arquivo.
-        """
-        wordlist = []
-
-        # Verifica se o objeto retornado é um arquivo válido
-        if not isinstance(self.wordlist, file):
-            raise TypeError("O objeto retornado não é um arquivo válido.")
-
-        # Lê as linhas do arquivo e adiciona na lista
-        for line in self.wordlist:
-            line = line.strip()
-            if line and any(w.isalpha() for w in line):
-                wordlist.append(line)
-
-        # Fecha o arquivo
-        self.wordlist.close()
-
-        return wordlist
+format_wordlist()
